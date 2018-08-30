@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Be Inspired{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center"><small>Refuse to be Average and get Inspire for greatness</small></h2>
+    {% for post in posts %}
+        <hr/>
+
+<div class="media">
+  <img src="{{post.image.url}}" class=" img-fluid product_thumbnail">
+  <div class="media-body">
+    <h4>
+        <a href="{{ post.get_absolute_url }}">
+            {{ post.title }}
+        </a>
+    </h4>
+      <p class="date">
+            Published {{ post.publish }} by {{ post.author }}
+        </p>
+    <p>{{ post.body|truncatewords:50|linebreaks }}<a href="{{ post.get_absolute_url }}" class="btn btn-primary">read more</a></p>
+  </div>
+</div>
+    {% endfor %}
+
+    {% include "blog/pagination.html" with page=posts %}
+
+{% endblock %}
